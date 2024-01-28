@@ -1120,7 +1120,7 @@ c
             write (*,*) '### ERROR in RDH5:'
             write (*,*) '### Scale is not a scale.'
             write (*,*) 'File name: ',trim(fname)
-            return
+!            return
           end if
 c
 c ****** Get dimension of scale.
