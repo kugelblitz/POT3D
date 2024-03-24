@@ -6547,13 +6547,19 @@ c
 c
         do k=1,np_g
           do j=1,nt_g
-            br0_g(j,k)=br0_g(j,k)-br00err
+             if (br0_g(j,k).gt.0.) then
+                br0_g(j,k) = br0_g(j,k)*(fluxp-fluxm)/(2.0*fluxp)
+             else
+                br0_g(j,k) = br0_g(j,k)*(fluxp-fluxm)/(-2.0*fluxm)
+             end if
+                
+c            br0_g(j,k)=br0_g(j,k)-br00err
           enddo
         enddo
 c
         write (*,*)
         write (*,*) '### COMMENT from READBR:'
-        write (*,*) '### Flux balance correction:'
+        write (*,*) '### Multiplicative flux balance correction:'
         write (*,*)
         write (*,*) 'BR00 (monopole Br field magnitude) = ',br00err
 c
